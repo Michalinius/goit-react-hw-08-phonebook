@@ -3,7 +3,7 @@ import Statistics from "./Statistics/Statistics.jsx";
 import FeedbackOptions from "./FeedbackOptions/FeedbackOptions.jsx";
 import Section from "./Section/Section.jsx";
 import Notification from "./Notification/Notification.jsx";
-import styles from "./globalStyles.css"
+import "./globalStyles.css"
 
 
 export class App extends React.Component {
