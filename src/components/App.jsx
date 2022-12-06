@@ -22,7 +22,7 @@ export class App extends React.Component {
   }
 
   deleteContact = (id) => {
-    this.setState(prevState => prevState.contacts = prevState.contacts.filter(element => element.id != id))
+    this.setState(prevState => prevState.contacts = prevState.contacts.filter(element => element.id !== id))
   }
 
   state = {
