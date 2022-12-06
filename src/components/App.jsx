@@ -25,6 +25,15 @@ export class App extends React.Component {
     this.setState(prevState => prevState.contacts = prevState.contacts.filter(element => element.id !== id))
   }
 
+  componentDidMount() {
+    const savedData = localStorage.getItem("contacts")
+    if (savedData) this.setState({ contacts: JSON.parse(savedData) })
+  }
+
+  componentDidUpdate() {
+    localStorage.setItem("contacts", JSON.stringify(this.state.contacts))
+  }
+
   state = {
     contacts: [
       { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
