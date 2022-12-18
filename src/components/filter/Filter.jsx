@@ -1,17 +1,15 @@
 import React from "react";
 import styles from "./filter.module.css"
 
-class Filter extends React.Component {
+const Filter = (props) => {
 
-    render() {
-        return (
-            <>
-                <p className={styles.title}>Find contacts by name</p>
-                <input className={styles.filter} type="text" name="search" onChange={event => { this.props.searching(event) }}
-                />
-            </>
-        )
-    }
-}
+    return (
+        <>
+            <p className={styles.title}>Find contacts by name</p>
+            <input className={styles.filter} type="text" name="search" onChange={event => { props.searching(event) }}
+            />
+        </>
+    )
+};
 
 export default Filter

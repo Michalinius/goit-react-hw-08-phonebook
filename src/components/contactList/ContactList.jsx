@@ -1,21 +1,19 @@
 import React from "react";
-import ListItem from "components/listItem/ListItem";
+import ListItem from "../listItem/ListItem";
 import styles from "./contactList.module.css"
 
-class ContactList extends React.Component {
+const ContactList = (props) => {
 
-    render() {
-        return (
-            <ul className={styles.contactList}>
-                {this.props.contactsArray.map(contact =>
-                    <ListItem
-                        deleteContact={this.props.deleteContact}
-                        key={contact.id}
-                        items={contact} />
-                )}
-            </ul>
-        )
-    }
-}
+    return (
+        <ul className={styles.contactList}>
+            {props.contactsArray.map(contact =>
+                <ListItem
+                    deleteContact={props.deleteContact}
+                    key={contact.id}
+                    items={contact} />
+            )}
+        </ul>
+    )
+};
 
 export default ContactList

@@ -1,69 +1,58 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ContactList from "./contactList/ContactList";
 import "./globalStyles.css"
 import Filter from "./filter/Filter";
 import { nanoid } from 'nanoid'
 import ContactForm from "./contactForm/ContactForm";
 
+export const App = () => {
 
+  const [contacts, setContacts] = useState(() => {
+    const savedData = localStorage.getItem("contacts")
+    if (savedData) return JSON.parse(savedData);
+    else return [];
+  });
+  const [filter, setFilter] = useState("");
 
-export class App extends React.Component {
-
-  addContact = (event) => {
+  const addContact = (event) => {
     event.preventDefault();
-    (!!this.state.contacts.find(element => (element.name === event.target.name.value)))
+    (!!contacts.find(element => (element.name === event.target.name.value)))
       ? alert(`${event.target.name.value} is already in contacts`)
-      : this.setState(prevState => prevState.contacts.push({ name: event.target.name.value, number: event.target.number.value, id: nanoid() })
+      : setContacts(prevState => {
+        const array = [...prevState]
+        array.push({ id: nanoid(), name: event.target.name.value, number: event.target.number.value })
+        return array;
+      }
       )
   }
 
-  searching = event => {
-    this.setState({ filter: event.target.value })
+  const searching = event => {
+    setFilter(event.target.value)
   }
 
-  deleteContact = (id) => {
-    this.setState(prevState => prevState.contacts = prevState.contacts.filter(element => element.id !== id))
+  const deleteContact = (id) => {
+    setContacts(prevState => prevState = prevState.filter(element => element.id !== id))
   }
 
-  componentDidMount() {
-    const savedData = localStorage.getItem("contacts")
-    if (savedData) this.setState({ contacts: JSON.parse(savedData) })
-  }
+  useEffect(() => {
+    localStorage.setItem("contacts", JSON.stringify(contacts))
+  }, [contacts])
 
-  componentDidUpdate() {
-    localStorage.setItem("contacts", JSON.stringify(this.state.contacts))
-  }
-
-  state = {
-    contacts: [
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    ],
-    name: '',
-    number: '',
-    filter: '',
-  };
-
-  render() {
-
-    return (
-      <>
-        <h3>Phonebook</h3>
-        <ContactForm
-          addContact={this.addContact} />
-        <div>
-          <h3>Contacts</h3>
-          <Filter
-            searching={this.searching}
-          />
-          <ContactList
-            deleteContact={this.deleteContact}
-            contactsArray={this.state.contacts.filter(contact => contact.name.toLowerCase().includes(this.state.filter.toLowerCase()))}
-          />
-        </div>
-      </>
-    )
-  }
+  return (
+    <>
+      <h3>Phonebook</h3>
+      <ContactForm
+        addContact={addContact} />
+      <div>
+        <h3>Contacts</h3>
+        <Filter
+          searching={searching}
+        />
+        <ContactList
+          deleteContact={deleteContact}
+          contactsArray={contacts.filter(contact => contact.name.toString().toLowerCase().includes(filter.toLowerCase()))}
+        />
+      </div>
+    </>
+  )
 };
