@@ -1,14 +1,19 @@
 import React from "react";
 import ListItem from "../listItem/ListItem";
 import styles from "./contactList.module.css"
+import { getContacts, getFilter } from "../../redux/selectors";
+import { useSelector } from "react-redux";
 
-const ContactList = (props) => {
+const ContactList = () => {
+
+    const contacts = useSelector(getContacts);
+    const filter = useSelector(getFilter);
+    const contactsArray = contacts.filter(contact => contact.name.toLowerCase().includes(filter.toLowerCase()));
 
     return (
         <ul className={styles.contactList}>
-            {props.contactsArray.map(contact =>
+            {contactsArray.map(contact =>
                 <ListItem
-                    deleteContact={props.deleteContact}
                     key={contact.id}
                     items={contact} />
             )}

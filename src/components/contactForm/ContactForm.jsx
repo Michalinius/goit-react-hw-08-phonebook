@@ -1,11 +1,24 @@
 import React from "react";
 import styles from "./contactForm.module.css"
+import { nanoid } from "nanoid";
+import { getContacts } from "../../redux/selectors";
+import { addContact } from "../../redux/actions";
+import { useSelector, useDispatch } from "react-redux";
 
-const ContactForm = (props) => {
+const ContactForm = () => {
+
+    const contacts = useSelector(getContacts);
+    const dispatch = useDispatch();
+
+    const addingContact = event => {
+        event.preventDefault();
+        (!!contacts.find(element => (element.name === event.target.name.value)))
+            ? alert(`${event.target.name.value} is already in contacts`)
+            : dispatch(addContact({ id: nanoid(), name: event.target.name.value, number: event.target.number.value }))
+    }
 
     return (
-        <form className={styles.form} onSubmit={event => { props.addContact(event) }
-        }>
+        <form className={styles.form} onSubmit={addingContact}>
             <label>Name</label>
             <input
                 type="text"
