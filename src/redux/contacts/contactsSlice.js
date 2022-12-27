@@ -19,7 +19,7 @@ const contactsSlice = createSlice({
     reducers: {
         setFilter(state, action) {
             state.filter = action.payload;
-        }
+        },
     },
     extraReducers: {
         [addContact.pending]: handlePending,
@@ -44,7 +44,8 @@ const contactsSlice = createSlice({
         [getContactsFromAPI.rejected]: handleRejected,
         [deleteContact.rejected]: handleRejected,
     }
-})
+}
+)
 
 export const { setFilter } = contactsSlice.actions
 export const contactsReducer = contactsSlice.reducer;

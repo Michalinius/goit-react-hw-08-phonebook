@@ -1,7 +1,7 @@
 import React from "react"
 import styles from "./listItem.module.css"
 import { useDispatch } from "react-redux";
-import { deleteContact } from "../../redux/operations";
+import { deleteContact } from "../../redux/contacts/operations";
 
 
 const ListItem = (props) => {
