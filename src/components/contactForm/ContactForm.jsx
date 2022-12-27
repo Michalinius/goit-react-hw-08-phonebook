@@ -29,6 +29,7 @@ const ContactForm = () => {
             />
             <label>Number</label>
             <input
+                style={{ marginBottom: "10px" }}
                 type="tel"
                 name="number"
                 pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"

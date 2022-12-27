@@ -3,7 +3,8 @@ import { logIn } from '../../redux/auth/operations';
 import styled from 'styled-components';
 
 const StyledForm = styled.form`
-width:320;`;
+width:320;
+`;
 
 const StyledLabel = styled.label`
 display: flex;

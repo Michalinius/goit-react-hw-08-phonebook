@@ -14,8 +14,11 @@ input {
 
 button {
     width: 80px;
-    margin-top: 20px;
-    background-color: transparent;
+    background-color: white;
     border-radius: 5px;
     border: 1px solid #e6e6e6;
+}
+
+.contactsButton {
+    margin-top: 20px;
 }
